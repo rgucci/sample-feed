@@ -19,18 +19,19 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import com.rgucci.sample.feed.presentation.R;
+import com.rgucci.sample.feed.presentation.view.activity.FeedActivity;
 import com.rgucci.sample.feed.presentation.view.activity.UserListActivity;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UserListActivityTest extends ActivityInstrumentationTestCase2<UserListActivity> {
+public class FeedActivityTest extends ActivityInstrumentationTestCase2<FeedActivity> {
 
-  private UserListActivity userListActivity;
+  private FeedActivity userListActivity;
 
-  public UserListActivityTest() {
-    super(UserListActivity.class);
+  public FeedActivityTest() {
+    super(FeedActivity.class);
   }
 
   @Override protected void setUp() throws Exception {
@@ -57,7 +58,7 @@ public class UserListActivityTest extends ActivityInstrumentationTestCase2<UserL
 
   private Intent createTargetIntent() {
     Intent intentLaunchActivity =
-        UserListActivity.getCallingIntent(getInstrumentation().getTargetContext());
+            FeedActivity.getCallingIntent(getInstrumentation().getTargetContext());
 
     return intentLaunchActivity;
   }

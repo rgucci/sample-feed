@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/lv_row_padding"
-    android:background="@drawable/selector_item_user"
+    android:background="@drawable/selector_feed_item"
     >
 
     <TextView

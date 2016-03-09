@@ -68,7 +68,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    final View fragmentView = inflater.inflate(R.layout.fragment_user_list, container, false);
+    final View fragmentView = inflater.inflate(R.layout.fragment_feed, container, false);
     ButterKnife.bind(this, fragmentView);
     setupRecyclerView();
     return fragmentView;
