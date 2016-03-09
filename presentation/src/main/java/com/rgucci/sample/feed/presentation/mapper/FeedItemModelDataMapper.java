@@ -36,10 +36,10 @@ public class FeedItemModelDataMapper {
   public FeedItemModelDataMapper() {}
 
   /**
-   * Transform a {@link User} into an {@link UserModel}.
+   * Transform a {@link User} into an {@link FeedItemModel}.
    *
    * @param user Object to be transformed.
-   * @return {@link UserModel}.
+   * @return {@link FeedItemModel}.
    */
   public FeedItemModel transform(User user) {
     if (user == null) {
