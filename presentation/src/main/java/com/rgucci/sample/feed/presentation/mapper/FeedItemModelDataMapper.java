@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Mapper class used to transform {@link User} (in the domain layer) to {@link UserModel} in the
+ * Mapper class used to transform {@link User} (in the domain layer) to {@link FeedItemModel} in the
  * presentation layer.
  */
 @PerActivity

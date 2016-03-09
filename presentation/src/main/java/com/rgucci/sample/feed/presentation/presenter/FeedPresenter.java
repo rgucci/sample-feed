@@ -47,7 +47,7 @@ public class FeedPresenter implements Presenter {
   private final FeedItemModelDataMapper userModelDataMapper;
 
   @Inject
-  public FeedPresenter(@Named("userList") UseCase getUserListUserCase,
+  public FeedPresenter(@Named("feedItemList") UseCase getUserListUserCase,
           FeedItemModelDataMapper userModelDataMapper) {
     this.getUserListUseCase = getUserListUserCase;
     this.userModelDataMapper = userModelDataMapper;

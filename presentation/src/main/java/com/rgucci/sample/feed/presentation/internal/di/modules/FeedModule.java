@@ -41,7 +41,7 @@ public class FeedModule {
     this.userId = userId;
   }
 
-  @Provides @PerActivity @Named("userList")
+  @Provides @PerActivity @Named("feedItemList")
   UseCase provideGetUserListUseCase(
       GetUserList getUserList) {
     return getUserList;
