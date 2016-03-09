@@ -23,7 +23,7 @@ import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 import com.rgucci.sample.feed.presentation.presenter.FeedPresenter;
 import com.rgucci.sample.feed.presentation.view.FeedView;
 import com.rgucci.sample.feed.presentation.view.adapter.FeedItemAdapter;
-import com.rgucci.sample.feed.presentation.view.adapter.UsersLayoutManager;
+import com.rgucci.sample.feed.presentation.view.adapter.FeedItemLayoutManager;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -148,7 +148,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   private void setupRecyclerView() {
     this.usersAdapter.setOnItemClickListener(onItemClickListener);
-    this.rv_users.setLayoutManager(new UsersLayoutManager(context()));
+    this.rv_users.setLayoutManager(new FeedItemLayoutManager(context()));
     this.rv_users.setAdapter(usersAdapter);
   }
 

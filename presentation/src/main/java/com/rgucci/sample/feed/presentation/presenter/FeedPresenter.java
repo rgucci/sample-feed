@@ -24,9 +24,7 @@ import com.rgucci.sample.feed.domain.interactor.UseCase;
 import com.rgucci.sample.feed.presentation.exception.ErrorMessageFactory;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import com.rgucci.sample.feed.presentation.mapper.FeedItemModelDataMapper;
-import com.rgucci.sample.feed.presentation.mapper.UserModelDataMapper;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
-import com.rgucci.sample.feed.presentation.model.UserModel;
 import com.rgucci.sample.feed.presentation.view.FeedView;
 
 import javax.inject.Inject;

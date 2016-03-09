@@ -18,10 +18,7 @@ package com.rgucci.sample.feed.presentation.internal.di.components;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import com.rgucci.sample.feed.presentation.internal.di.modules.ActivityModule;
 import com.rgucci.sample.feed.presentation.internal.di.modules.FeedModule;
-import com.rgucci.sample.feed.presentation.internal.di.modules.UserModule;
 import com.rgucci.sample.feed.presentation.view.fragment.FeedFragment;
-import com.rgucci.sample.feed.presentation.view.fragment.UserDetailsFragment;
-import com.rgucci.sample.feed.presentation.view.fragment.UserListFragment;
 import dagger.Component;
 
 /**
@@ -32,5 +29,4 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, FeedModule.class})
 public interface FeedComponent extends ActivityComponent {
   void inject(FeedFragment feedFragment);
-  void inject(UserDetailsFragment userDetailsFragment);
 }

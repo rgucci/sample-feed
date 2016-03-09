@@ -18,7 +18,6 @@ package com.rgucci.sample.feed.presentation.mapper;
 import com.rgucci.sample.feed.domain.User;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
-import com.rgucci.sample.feed.presentation.model.UserModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -56,10 +55,10 @@ public class FeedItemModelDataMapper {
   }
 
   /**
-   * Transform a Collection of {@link User} into a Collection of {@link UserModel}.
+   * Transform a Collection of {@link User} into a Collection of {@link FeedItemModel}.
    *
    * @param usersCollection Objects to be transformed.
-   * @return List of {@link UserModel}.
+   * @return List of {@link FeedItemModel}.
    */
   public Collection<FeedItemModel> transform(Collection<User> usersCollection) {
     Collection<FeedItemModel> userModelsCollection;

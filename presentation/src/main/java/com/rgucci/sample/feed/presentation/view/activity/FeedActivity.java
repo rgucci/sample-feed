@@ -14,7 +14,6 @@ import com.rgucci.sample.feed.presentation.internal.di.HasComponent;
 import com.rgucci.sample.feed.presentation.internal.di.components.DaggerFeedComponent;
 import com.rgucci.sample.feed.presentation.internal.di.components.FeedComponent;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
-import com.rgucci.sample.feed.presentation.model.UserModel;
 import com.rgucci.sample.feed.presentation.view.fragment.FeedFragment;
 
 /**
@@ -52,6 +51,6 @@ public class FeedActivity extends BaseActivity implements HasComponent<FeedCompo
     }
 
     @Override public void onUserClicked(FeedItemModel userModel) {
-        this.navigator.navigateToUserDetails(this, userModel.getUserId());
+        //TODO action when feed item is clicked
     }
 }
