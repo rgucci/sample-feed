@@ -16,9 +16,11 @@
 package com.fernandocejas.android10.sample.data.entity.mapper;
 
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
-import com.fernandocejas.android10.sample.data.entity.UserEntity;
+import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.google.gson.JsonSyntaxException;
 import java.util.Collection;
+
+import com.rgucci.sample.feed.data.entity.mapper.UserEntityJsonMapper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

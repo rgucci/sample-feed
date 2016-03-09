@@ -16,8 +16,9 @@
 package com.fernandocejas.android10.sample.data.entity.mapper;
 
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
-import com.fernandocejas.android10.sample.data.entity.UserEntity;
-import com.fernandocejas.android10.sample.domain.User;
+import com.rgucci.sample.feed.data.entity.UserEntity;
+import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
+import com.rgucci.sample.feed.domain.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

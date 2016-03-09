@@ -15,6 +15,7 @@
  */
 package com.fernandocejas.android10.sample.data;
 
+import com.rgucci.sample.feed.data.BuildConfig;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;

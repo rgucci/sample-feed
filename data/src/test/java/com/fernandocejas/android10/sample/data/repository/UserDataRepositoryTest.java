@@ -16,11 +16,12 @@
 package com.fernandocejas.android10.sample.data.repository;
 
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
-import com.fernandocejas.android10.sample.data.entity.UserEntity;
-import com.fernandocejas.android10.sample.data.entity.mapper.UserEntityDataMapper;
-import com.fernandocejas.android10.sample.data.repository.datasource.UserDataStore;
-import com.fernandocejas.android10.sample.data.repository.datasource.UserDataStoreFactory;
-import com.fernandocejas.android10.sample.domain.User;
+import com.rgucci.sample.feed.data.entity.UserEntity;
+import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
+import com.rgucci.sample.feed.data.repository.UserDataRepository;
+import com.rgucci.sample.feed.data.repository.datasource.UserDataStore;
+import com.rgucci.sample.feed.data.repository.datasource.UserDataStoreFactory;
+import com.rgucci.sample.feed.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

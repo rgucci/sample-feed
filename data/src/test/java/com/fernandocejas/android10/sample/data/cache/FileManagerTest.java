@@ -17,6 +17,8 @@ package com.fernandocejas.android10.sample.data.cache;
 
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
 import java.io.File;
+
+import com.rgucci.sample.feed.data.cache.FileManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -16,9 +16,10 @@
 package com.fernandocejas.android10.sample.data.repository.datasource;
 
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
-import com.fernandocejas.android10.sample.data.cache.UserCache;
-import com.fernandocejas.android10.sample.data.entity.UserEntity;
-import com.fernandocejas.android10.sample.data.net.RestApi;
+import com.rgucci.sample.feed.data.cache.UserCache;
+import com.rgucci.sample.feed.data.entity.UserEntity;
+import com.rgucci.sample.feed.data.net.RestApi;
+import com.rgucci.sample.feed.data.repository.datasource.CloudUserDataStore;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
