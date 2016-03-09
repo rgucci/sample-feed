@@ -27,6 +27,11 @@
     </activity>
 
     <activity
+      android:name="com.rgucci.sample.feed.presentation.view.activity.FeedActivity"
+      android:label="@string/activity_title_feed">
+    </activity>
+
+      <activity
         android:name="com.rgucci.sample.feed.presentation.view.activity.UserDetailsActivity"
         android:label="@string/activity_title_user_details">
     </activity>
