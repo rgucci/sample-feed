@@ -33,13 +33,7 @@ import javax.inject.Named;
 @Module
 public class FeedModule {
 
-  private int userId = -1;
-
   public FeedModule() {}
-
-  public FeedModule(int userId) {
-    this.userId = userId;
-  }
 
   @Provides @PerActivity @Named("feedItemList")
   UseCase provideGetUserListUseCase(
@@ -47,9 +41,4 @@ public class FeedModule {
     return getUserList;
   }
 
-  @Provides @PerActivity @Named("userDetails") UseCase provideGetUserDetailsUseCase(
-      UserRepository userRepository, ThreadExecutor threadExecutor,
-      PostExecutionThread postExecutionThread) {
-    return new GetUserDetails(userId, userRepository, threadExecutor, postExecutionThread);
-  }
 }
