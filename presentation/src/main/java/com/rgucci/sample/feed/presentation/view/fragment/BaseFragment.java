@@ -5,7 +5,7 @@
  */
 package com.rgucci.sample.feed.presentation.view.fragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
 import com.rgucci.sample.feed.presentation.internal.di.HasComponent;
 

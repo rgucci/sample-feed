@@ -18,6 +18,7 @@ package com.rgucci.sample.feed.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 import com.rgucci.sample.feed.presentation.view.activity.FeedActivity;
+import com.rgucci.sample.feed.presentation.view.activity.TabActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +41,8 @@ public class Navigator {
    */
   public void navigateToUserList(Context context) {
     if (context != null) {
-      Intent intentToLaunch = FeedActivity.getCallingIntent(context);
+//      Intent intentToLaunch = FeedActivity.getCallingIntent(context);
+      Intent intentToLaunch = TabActivity.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }
