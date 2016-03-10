@@ -20,6 +20,7 @@ import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.exception.DefaultErrorBundle;
 import com.rgucci.sample.feed.domain.exception.ErrorBundle;
 import com.rgucci.sample.feed.domain.interactor.DefaultSubscriber;
+import com.rgucci.sample.feed.domain.interactor.GetFeedItems;
 import com.rgucci.sample.feed.domain.interactor.UseCase;
 import com.rgucci.sample.feed.presentation.exception.ErrorMessageFactory;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
@@ -77,7 +78,7 @@ public class FeedPresenter implements Presenter {
   private void loadUserList() {
     this.hideViewRetry();
     this.showViewLoading();
-    this.getUserList();
+    this.getUserList(1);
   }
 
   public void onUserClicked(FeedItemModel userModel) {
@@ -112,7 +113,8 @@ public class FeedPresenter implements Presenter {
     this.viewListView.renderUserList(userModelsCollection);
   }
 
-  private void getUserList() {
+  private void getUserList(final int page) {
+    ((GetFeedItems) this.getUserListUseCase).init(page);
     this.getUserListUseCase.execute(new UserListSubscriber());
   }
 

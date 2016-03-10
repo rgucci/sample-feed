@@ -31,6 +31,8 @@ public class GetFeedItems extends UseCase {
 
   private final FeedItemRepository feedItemRepository;
 
+  private int page;
+
   @Inject
   public GetFeedItems(FeedItemRepository feedItemRepository, ThreadExecutor threadExecutor,
           PostExecutionThread postExecutionThread) {
@@ -39,6 +41,11 @@ public class GetFeedItems extends UseCase {
   }
 
   @Override public Observable buildUseCaseObservable() {
-    return this.feedItemRepository.feedItems();
+    return this.feedItemRepository.feedItems(page);
+  }
+
+  public UseCase init(final int page) {
+    this.page = page;
+    return this;
   }
 }

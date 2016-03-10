@@ -32,8 +32,8 @@ public class FeedModule {
   public FeedModule() {}
 
   @Provides @PerActivity @Named("feedItemList")
-  UseCase provideGetUserListUseCase(
-      GetFeedItems getFeedItems) {
+  UseCase provideFeedItemList(
+          GetFeedItems getFeedItems) {
     return getFeedItems;
   }
 

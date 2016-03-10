@@ -9,9 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.rgucci.sample.feed.presentation.R;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 
@@ -53,6 +55,9 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
   @Override public void onBindViewHolder(FeedItemViewHolder holder, final int position) {
     final FeedItemModel feedItemModel = this.feedItemsList.get(position);
     holder.textViewTitle.setText(feedItemModel.getDescription());
+    Glide.with(holder.imageViewThumbnail.getContext()).
+            load(feedItemModel.getCoverUrl())
+            .into(holder.imageViewThumbnail);
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (FeedItemAdapter.this.onItemClickListener != null) {
@@ -84,6 +89,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
 
   static class FeedItemViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.title) TextView textViewTitle;
+    @Bind(R.id.thumbnail) ImageView imageViewThumbnail;
 
     public FeedItemViewHolder(View itemView) {
       super(itemView);

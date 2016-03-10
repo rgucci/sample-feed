@@ -28,7 +28,7 @@ public interface UserDataStore {
    * Get an {@link rx.Observable} which will emit a List of {@link UserEntity}.
    */
   Observable<List<UserEntity>> userEntityList();
-  Observable<List<FeedItemEntity>> feedItemEntityList();
+  Observable<List<FeedItemEntity>> feedItemEntityList(int page);
 
   /**
    * Get an {@link rx.Observable} which will emit a {@link UserEntity} by its id.

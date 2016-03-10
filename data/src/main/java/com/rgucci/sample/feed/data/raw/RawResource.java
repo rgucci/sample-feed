@@ -27,7 +27,7 @@ public class RawResource {
     private final Context context;
     private final Gson gson = new Gson();
 
-    private final int[] pages = { R.raw.hot_1};
+    private final int[] pages = { R.raw.hot_1, R.raw.hot_2, R.raw.hot_3};
 
     public RawResource(final Context context) {
         this.context = context;

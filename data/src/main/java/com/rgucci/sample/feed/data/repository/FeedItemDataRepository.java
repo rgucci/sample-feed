@@ -50,11 +50,11 @@ public class FeedItemDataRepository implements FeedItemRepository {
   }
 
   @SuppressWarnings("Convert2MethodRef")
-  @Override public Observable<List<FeedItem>> feedItems() {
+  @Override public Observable<List<FeedItem>> feedItems(final int page) {
     //we always get all feedItems from the cloud
 //    final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
     final UserDataStore userDataStore = this.userDataStoreFactory.createRawResourceDataStore();
-    return userDataStore.feedItemEntityList()
+    return userDataStore.feedItemEntityList(page)
         .map(userEntities -> this.userEntityDataMapper.transform(userEntities));
   }
 

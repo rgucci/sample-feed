@@ -47,8 +47,8 @@ public class RawDataSource implements UserDataStore {
 
   @RxLogObservable
   @Override
-  public Observable<List<FeedItemEntity>> feedItemEntityList() {
-    return rawResource.feedItemEntityList(1);
+  public Observable<List<FeedItemEntity>> feedItemEntityList(final int page) {
+    return rawResource.feedItemEntityList(page);
   }
 
   @Override public Observable<UserEntity> userEntityDetails(final String userId) {

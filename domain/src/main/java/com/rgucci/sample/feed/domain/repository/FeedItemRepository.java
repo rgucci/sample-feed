@@ -27,6 +27,6 @@ public interface FeedItemRepository {
   /**
    * Get an {@link rx.Observable} which will emit a List of {@link FeedItem}.
    */
-  Observable<List<FeedItem>> feedItems();
+  Observable<List<FeedItem>> feedItems(final int page);
 
 }

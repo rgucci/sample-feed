@@ -53,7 +53,7 @@ public class CloudUserDataStore implements UserDataStore {
   }
 
   @Override
-  public Observable<List<FeedItemEntity>> feedItemEntityList() {
+  public Observable<List<FeedItemEntity>> feedItemEntityList(final int page) {
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 
