@@ -36,7 +36,7 @@ public class FeedActivity extends BaseActivity implements HasComponent<FeedCompo
 
         this.initializeInjector();
         if (savedInstanceState == null) {
-            addFragment(R.id.fragmentContainer, FeedFragment.newInstance(Category.Fresh));
+            addFragment(R.id.fragmentContainer, FeedFragment.newInstance(Category.Fresh, true));
         }
     }
 

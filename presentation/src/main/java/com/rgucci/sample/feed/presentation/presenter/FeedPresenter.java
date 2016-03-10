@@ -24,7 +24,6 @@ import com.rgucci.sample.feed.domain.interactor.DefaultSubscriber;
 import com.rgucci.sample.feed.domain.interactor.GetFeedItems;
 import com.rgucci.sample.feed.domain.interactor.UseCase;
 import com.rgucci.sample.feed.presentation.exception.ErrorMessageFactory;
-import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import com.rgucci.sample.feed.presentation.mapper.FeedItemModelDataMapper;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 import com.rgucci.sample.feed.presentation.view.FeedView;
@@ -38,7 +37,6 @@ import java.util.List;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
 public class FeedPresenter implements Presenter {
 
   private FeedView viewListView;

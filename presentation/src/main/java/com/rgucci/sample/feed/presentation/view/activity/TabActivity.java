@@ -23,6 +23,7 @@ public class TabActivity extends BaseActivity implements HasComponent<FeedCompon
 
     private static final Category tabCategories[] = {Category.Fresh, Category.Hot, Category.Trending};
     private FeedComponent feedComponent;
+    private FeedFragment[] fragments = new FeedFragment[tabCategories.length];
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, TabActivity.class);
@@ -35,11 +36,18 @@ public class TabActivity extends BaseActivity implements HasComponent<FeedCompon
 
         initializeInjector();
 
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
         final ViewPager pager = (ViewPager) findViewById(R.id.pager);
+
         pager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(final int position) {
-                return FeedFragment.newInstance(tabCategories[position]);
+                if (fragments[position] == null) {
+                    fragments[position] = FeedFragment.newInstance(tabCategories[position], position == 0);
+                }
+                return fragments[position];
             }
 
             @Override
@@ -47,29 +55,46 @@ public class TabActivity extends BaseActivity implements HasComponent<FeedCompon
                 return tabCategories.length;
             }
         });
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
 
-//        final ActionBar actionBar = getSupportActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-//            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-//                pager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//                // hide the given tab
-//            }
-//
-//            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//                // probably ignore this event
-//            }
-//        };
-//
-//        for (int i = 0; i < 3; i++) {
-//            actionBar.addTab(
-//                    actionBar.newTab()
-//                            .setText(tabCategories[i].toString())
-//                            .setTabListener(tabListener));
-//        }
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                fragments[position].loadFeedItems();
+                actionBar.setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+
+            }
+        });
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                pager.setCurrentItem(tab.getPosition());
+                if (fragments[tab.getPosition()] != null) {
+                    fragments[tab.getPosition()].loadFeedItems();
+                }
+            }
+
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // hide the given tab
+            }
+
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // probably ignore this event
+            }
+        };
+
+        for (int i = 0; i < tabCategories.length; i++) {
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setText(tabCategories[i].toString())
+                            .setTabListener(tabListener));
+        }
 
     }
 

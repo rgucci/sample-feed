@@ -37,6 +37,7 @@ import java.util.List;
 public class FeedFragment extends BaseFragment implements FeedView {
 
     private static final String PARAM_CATEGORY = "PARAM_CATEGORY";
+    private static final String PARAM_LOAD_ON_CREATE = "PARAM_LOAD_ON_CREATE";
 
   /**
    * Interface for listening user list events.
@@ -45,10 +46,11 @@ public class FeedFragment extends BaseFragment implements FeedView {
     void onUserClicked(final FeedItemModel userModel);
   }
 
-    public static FeedFragment newInstance(final Category category) {
+    public static FeedFragment newInstance(final Category category, final boolean loadItemsOnCreate) {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
         args.putSerializable(PARAM_CATEGORY, category);
+        args.putBoolean(PARAM_LOAD_ON_CREATE, loadItemsOnCreate);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,6 +65,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   private FeedListener feedListener;
     private Category category = Category.Hot;
+    private boolean loadOnCreate;
 
   public FeedFragment() {
     setRetainInstance(true);
@@ -85,6 +88,8 @@ public class FeedFragment extends BaseFragment implements FeedView {
           category = paramCategory;
       }
 
+      loadOnCreate = args.getBoolean(PARAM_LOAD_ON_CREATE, false);
+
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,7 +103,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     this.feedPresenter.setView(this);
-    if (savedInstanceState == null) {
+    if (savedInstanceState == null && loadOnCreate) {
       this.loadFeedItems();
     }
   }
@@ -175,8 +180,6 @@ public class FeedFragment extends BaseFragment implements FeedView {
     this.rv_users.setOnScrollListener(new EndlessRecyclerScrollListener(layoutManager) {
       @Override
       public void onLoadMore(final int currentPage) {
-        //TODO load the next pages here
-          Log.d("LoadMore", "page: " + currentPage);
           feedPresenter.getNextPage(currentPage);
       }
     });
@@ -185,7 +188,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
   /**
    * Loads all feedItems.
    */
-  private void loadFeedItems() {
+  public void loadFeedItems() {
     this.feedPresenter.setCategory(category);
     this.feedPresenter.initialize();
   }
