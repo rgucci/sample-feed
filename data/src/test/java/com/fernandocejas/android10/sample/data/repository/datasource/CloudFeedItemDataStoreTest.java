@@ -29,7 +29,7 @@ import rx.Observable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
-public class CloudUserDataStoreTest extends ApplicationTestCase {
+public class CloudFeedItemDataStoreTest extends ApplicationTestCase {
 
   private static final int FAKE_USER_ID = 765;
 

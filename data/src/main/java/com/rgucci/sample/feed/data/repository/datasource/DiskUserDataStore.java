@@ -16,6 +16,7 @@
 package com.rgucci.sample.feed.data.repository.datasource;
 
 import com.rgucci.sample.feed.data.cache.UserCache;
+import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import java.util.List;
 
@@ -38,11 +39,16 @@ public class DiskUserDataStore implements UserDataStore {
   }
 
   @Override public Observable<List<UserEntity>> userEntityList() {
-    //TODO: implement simple cache for storing/retrieving collections of users.
+    //TODO: implement simple cache for storing/retrieving collections of feedItems.
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 
-  @Override public Observable<UserEntity> userEntityDetails(final int userId) {
+  @Override
+  public Observable<List<FeedItemEntity>> feedItemEntityList() {
+    throw new UnsupportedOperationException("Operation is not available!!!");
+  }
+
+  @Override public Observable<UserEntity> userEntityDetails(final String userId) {
      return this.userCache.get(userId);
   }
 }

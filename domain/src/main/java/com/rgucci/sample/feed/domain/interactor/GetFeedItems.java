@@ -15,30 +15,30 @@
  */
 package com.rgucci.sample.feed.domain.interactor;
 
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
 import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
+import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
 import javax.inject.Inject;
 
 import rx.Observable;
 
 /**
  * This class is an implementation of {@link UseCase} that represents a use case for
- * retrieving a collection of all {@link User}.
+ * retrieving a collection of all {@link FeedItem}.
  */
-public class GetUserList extends UseCase {
+public class GetFeedItems extends UseCase {
 
-  private final UserRepository userRepository;
+  private final FeedItemRepository feedItemRepository;
 
   @Inject
-  public GetUserList(UserRepository userRepository, ThreadExecutor threadExecutor,
-      PostExecutionThread postExecutionThread) {
+  public GetFeedItems(FeedItemRepository feedItemRepository, ThreadExecutor threadExecutor,
+          PostExecutionThread postExecutionThread) {
     super(threadExecutor, postExecutionThread);
-    this.userRepository = userRepository;
+    this.feedItemRepository = feedItemRepository;
   }
 
   @Override public Observable buildUseCaseObservable() {
-    return this.userRepository.users();
+    return this.feedItemRepository.feedItems();
   }
 }

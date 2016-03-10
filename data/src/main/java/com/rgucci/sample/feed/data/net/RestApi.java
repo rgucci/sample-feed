@@ -40,5 +40,5 @@ public interface RestApi {
    *
    * @param userId The user id used to get user data.
    */
-  Observable<UserEntity> userEntityById(final int userId);
+  Observable<UserEntity> userEntityById(final String userId);
 }

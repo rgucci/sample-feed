@@ -15,37 +15,38 @@
  */
 package com.rgucci.sample.feed.data.entity.mapper;
 
-import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.rgucci.sample.feed.data.entity.FeedItemEntity;
+
+import javax.inject.Inject;
 import java.lang.reflect.Type;
 import java.util.List;
-import javax.inject.Inject;
 
 /**
  * Class used to transform from Strings representing json to valid objects.
  */
-public class UserEntityJsonMapper {
+public class FeedItemEntityJsonMapper {
 
   private final Gson gson;
 
   @Inject
-  public UserEntityJsonMapper() {
+  public FeedItemEntityJsonMapper() {
     this.gson = new Gson();
   }
 
   /**
-   * Transform from valid json string to {@link UserEntity}.
+   * Transform from valid json string to {@link FeedItemEntity}.
    *
    * @param userJsonResponse A json representing a user profile.
-   * @return {@link UserEntity}.
-   * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
+   * @return {@link FeedItemEntity}.
+   * @throws JsonSyntaxException if the json string is not a valid json structure.
    */
-  public UserEntity transformUserEntity(String userJsonResponse) throws JsonSyntaxException {
+  public FeedItemEntity transformUserEntity(String userJsonResponse) throws JsonSyntaxException {
     try {
-      Type userEntityType = new TypeToken<UserEntity>() {}.getType();
-      UserEntity userEntity = this.gson.fromJson(userJsonResponse, userEntityType);
+      Type userEntityType = new TypeToken<FeedItemEntity>() {}.getType();
+      FeedItemEntity userEntity = this.gson.fromJson(userJsonResponse, userEntityType);
 
       return userEntity;
     } catch (JsonSyntaxException jsonException) {
@@ -54,18 +55,18 @@ public class UserEntityJsonMapper {
   }
 
   /**
-   * Transform from valid json string to List of {@link UserEntity}.
+   * Transform from valid json string to List of {@link FeedItemEntity}.
    *
    * @param userListJsonResponse A json representing a collection of feedItems.
-   * @return List of {@link UserEntity}.
-   * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
+   * @return List of {@link FeedItemEntity}.
+   * @throws JsonSyntaxException if the json string is not a valid json structure.
    */
-  public List<UserEntity> transformUserEntityCollection(String userListJsonResponse)
+  public List<FeedItemEntity> transformUserEntityCollection(String userListJsonResponse)
       throws JsonSyntaxException {
 
-    List<UserEntity> userEntityCollection;
+    List<FeedItemEntity> userEntityCollection;
     try {
-      Type listOfUserEntityType = new TypeToken<List<UserEntity>>() {}.getType();
+      Type listOfUserEntityType = new TypeToken<List<FeedItemEntity>>() {}.getType();
       userEntityCollection = this.gson.fromJson(userListJsonResponse, listOfUserEntityType);
 
       return userEntityCollection;

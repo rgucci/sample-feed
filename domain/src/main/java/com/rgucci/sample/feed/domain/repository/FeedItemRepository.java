@@ -15,23 +15,18 @@
  */
 package com.rgucci.sample.feed.domain.repository;
 
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
+
 import java.util.List;
 import rx.Observable;
 
 /**
- * Interface that represents a Repository for getting {@link User} related data.
+ * Interface that represents a Repository for getting {@link FeedItem} related data.
  */
-public interface UserRepository {
+public interface FeedItemRepository {
   /**
-   * Get an {@link rx.Observable} which will emit a List of {@link User}.
+   * Get an {@link rx.Observable} which will emit a List of {@link FeedItem}.
    */
-  Observable<List<User>> users();
+  Observable<List<FeedItem>> feedItems();
 
-  /**
-   * Get an {@link rx.Observable} which will emit a {@link User}.
-   *
-   * @param userId The user id used to retrieve user data.
-   */
-  Observable<User> user(final int userId);
 }

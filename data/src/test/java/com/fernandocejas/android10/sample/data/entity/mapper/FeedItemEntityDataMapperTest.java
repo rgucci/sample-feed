@@ -18,7 +18,8 @@ package com.fernandocejas.android10.sample.data.entity.mapper;
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +31,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class UserEntityDataMapperTest extends ApplicationTestCase {
+public class FeedItemEntityDataMapperTest extends ApplicationTestCase {
 
   private static final int FAKE_USER_ID = 123;
   private static final String FAKE_FULLNAME = "Tony Stark";
@@ -45,11 +46,11 @@ public class UserEntityDataMapperTest extends ApplicationTestCase {
   @Test
   public void testTransformUserEntity() {
     UserEntity userEntity = createFakeUserEntity();
-    User user = userEntityDataMapper.transform(userEntity);
+    FeedItem feedItem = userEntityDataMapper.transform(userEntity);
 
-    assertThat(user, is(instanceOf(User.class)));
-    assertThat(user.getUserId(), is(FAKE_USER_ID));
-    assertThat(user.getFullName(), is(FAKE_FULLNAME));
+    assertThat(feedItem, is(instanceOf(FeedItem.class)));
+    assertThat(feedItem.getId(), is(FAKE_USER_ID));
+    assertThat(feedItem.getFullName(), is(FAKE_FULLNAME));
   }
 
   @Test
@@ -61,11 +62,11 @@ public class UserEntityDataMapperTest extends ApplicationTestCase {
     userEntityList.add(mockUserEntityOne);
     userEntityList.add(mockUserEntityTwo);
 
-    Collection<User> userCollection = userEntityDataMapper.transform(userEntityList);
+    Collection<FeedItem> feedItemCollection = userEntityDataMapper.transform(userEntityList);
 
-    assertThat(userCollection.toArray()[0], is(instanceOf(User.class)));
-    assertThat(userCollection.toArray()[1], is(instanceOf(User.class)));
-    assertThat(userCollection.size(), is(2));
+    assertThat(feedItemCollection.toArray()[0], is(instanceOf(FeedItem.class)));
+    assertThat(feedItemCollection.toArray()[1], is(instanceOf(FeedItem.class)));
+    assertThat(feedItemCollection.size(), is(2));
   }
 
   private UserEntity createFakeUserEntity() {

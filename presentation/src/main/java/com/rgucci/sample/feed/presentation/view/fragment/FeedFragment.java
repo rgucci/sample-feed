@@ -153,7 +153,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
   }
 
   /**
-   * Loads all users.
+   * Loads all feedItems.
    */
   private void loadUserList() {
     this.userListPresenter.initialize();

@@ -34,7 +34,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
-public class UserDataStoreFactoryTest extends ApplicationTestCase {
+public class FeedItemDataStoreFactoryTest extends ApplicationTestCase {
 
   private static final int FAKE_USER_ID = 11;
 

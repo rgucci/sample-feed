@@ -16,7 +16,7 @@
 package com.rgucci.sample.feed.presentation.presenter;
 
 import android.support.annotation.NonNull;
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.exception.DefaultErrorBundle;
 import com.rgucci.sample.feed.domain.exception.ErrorBundle;
 import com.rgucci.sample.feed.domain.interactor.DefaultSubscriber;
@@ -72,7 +72,7 @@ public class FeedPresenter implements Presenter {
   }
 
   /**
-   * Loads all users.
+   * Loads all feedItems.
    */
   private void loadUserList() {
     this.hideViewRetry();
@@ -106,7 +106,7 @@ public class FeedPresenter implements Presenter {
     this.viewListView.showError(errorMessage);
   }
 
-  private void showUsersCollectionInView(Collection<User> usersCollection) {
+  private void showUsersCollectionInView(Collection<FeedItem> usersCollection) {
     final Collection<FeedItemModel> userModelsCollection =
         this.userModelDataMapper.transform(usersCollection);
     this.viewListView.renderUserList(userModelsCollection);
@@ -116,7 +116,7 @@ public class FeedPresenter implements Presenter {
     this.getUserListUseCase.execute(new UserListSubscriber());
   }
 
-  private final class UserListSubscriber extends DefaultSubscriber<List<User>> {
+  private final class UserListSubscriber extends DefaultSubscriber<List<FeedItem>> {
 
     @Override public void onCompleted() {
       FeedPresenter.this.hideViewLoading();
@@ -128,8 +128,8 @@ public class FeedPresenter implements Presenter {
       FeedPresenter.this.showViewRetry();
     }
 
-    @Override public void onNext(List<User> users) {
-      FeedPresenter.this.showUsersCollectionInView(users);
+    @Override public void onNext(List<FeedItem> feedItems) {
+      FeedPresenter.this.showUsersCollectionInView(feedItems);
     }
   }
 }

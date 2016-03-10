@@ -27,7 +27,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class DiskUserDataStoreTest extends ApplicationTestCase {
+public class DiskFeedItemDataStoreTest extends ApplicationTestCase {
 
   private static final int FAKE_USER_ID = 11;
 

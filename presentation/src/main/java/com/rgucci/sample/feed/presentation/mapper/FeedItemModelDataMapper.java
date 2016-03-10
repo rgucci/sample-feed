@@ -15,7 +15,7 @@
  */
 package com.rgucci.sample.feed.presentation.mapper;
 
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 
@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Mapper class used to transform {@link User} (in the domain layer) to {@link FeedItemModel} in the
+ * Mapper class used to transform {@link FeedItem} (in the domain layer) to {@link FeedItemModel} in the
  * presentation layer.
  */
 @PerActivity
@@ -35,43 +35,40 @@ public class FeedItemModelDataMapper {
   public FeedItemModelDataMapper() {}
 
   /**
-   * Transform a {@link User} into an {@link FeedItemModel}.
+   * Transform a {@link FeedItem} into an {@link FeedItemModel}.
    *
-   * @param user Object to be transformed.
+   * @param feedItem Object to be transformed.
    * @return {@link FeedItemModel}.
    */
-  public FeedItemModel transform(User user) {
-    if (user == null) {
+  public FeedItemModel transform(FeedItem feedItem) {
+    if (feedItem == null) {
       throw new IllegalArgumentException("Cannot transform a null value");
     }
-    FeedItemModel userModel = new FeedItemModel(user.getUserId());
-    userModel.setCoverUrl(user.getCoverUrl());
-    userModel.setFullName(user.getFullName());
-    userModel.setEmail(user.getEmail());
-    userModel.setDescription(user.getDescription());
-    userModel.setFollowers(user.getFollowers());
+    FeedItemModel feedItemModel = new FeedItemModel(feedItem.getId());
+    feedItemModel.setCoverUrl(feedItem.getCoverUrl());
+    feedItemModel.setDescription(feedItem.getDescription());
 
-    return userModel;
+    return feedItemModel;
   }
 
   /**
-   * Transform a Collection of {@link User} into a Collection of {@link FeedItemModel}.
+   * Transform a Collection of {@link FeedItem} into a Collection of {@link FeedItemModel}.
    *
-   * @param usersCollection Objects to be transformed.
+   * @param feedItemCollection Objects to be transformed.
    * @return List of {@link FeedItemModel}.
    */
-  public Collection<FeedItemModel> transform(Collection<User> usersCollection) {
-    Collection<FeedItemModel> userModelsCollection;
+  public Collection<FeedItemModel> transform(Collection<FeedItem> feedItemCollection) {
+    Collection<FeedItemModel> feedItemModels;
 
-    if (usersCollection != null && !usersCollection.isEmpty()) {
-      userModelsCollection = new ArrayList<>();
-      for (User user : usersCollection) {
-        userModelsCollection.add(transform(user));
+    if (feedItemCollection != null && !feedItemCollection.isEmpty()) {
+      feedItemModels = new ArrayList<>();
+      for (FeedItem feedItem : feedItemCollection) {
+        feedItemModels.add(transform(feedItem));
       }
     } else {
-      userModelsCollection = Collections.emptyList();
+      feedItemModels = Collections.emptyList();
     }
 
-    return userModelsCollection;
+    return feedItemModels;
   }
 }

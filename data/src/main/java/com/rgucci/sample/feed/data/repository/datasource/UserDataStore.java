@@ -15,6 +15,7 @@
  */
 package com.rgucci.sample.feed.data.repository.datasource;
 
+import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import java.util.List;
 import rx.Observable;
@@ -27,11 +28,12 @@ public interface UserDataStore {
    * Get an {@link rx.Observable} which will emit a List of {@link UserEntity}.
    */
   Observable<List<UserEntity>> userEntityList();
+  Observable<List<FeedItemEntity>> feedItemEntityList();
 
   /**
    * Get an {@link rx.Observable} which will emit a {@link UserEntity} by its id.
    *
    * @param userId The id to retrieve user data.
    */
-  Observable<UserEntity> userEntityDetails(final int userId);
+  Observable<UserEntity> userEntityDetails(final String userId);
 }

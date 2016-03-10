@@ -21,20 +21,20 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class UserTest {
+public class FeedItemTest {
 
   private static final int FAKE_USER_ID = 8;
 
-  private User user;
+  private FeedItem feedItem;
 
   @Before
   public void setUp() {
-    user = new User(FAKE_USER_ID);
+    feedItem = new FeedItem(FAKE_USER_ID);
   }
 
   @Test
   public void testUserConstructorHappyCase() {
-    int userId = user.getUserId();
+    int userId = feedItem.getId();
 
     assertThat(userId, is(FAKE_USER_ID));
   }

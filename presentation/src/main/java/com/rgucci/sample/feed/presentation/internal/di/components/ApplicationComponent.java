@@ -18,7 +18,7 @@ package com.rgucci.sample.feed.presentation.internal.di.components;
 import android.content.Context;
 import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
 import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
+import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
 import com.rgucci.sample.feed.presentation.internal.di.modules.ApplicationModule;
 import com.rgucci.sample.feed.presentation.view.activity.BaseActivity;
 import dagger.Component;
@@ -36,5 +36,5 @@ public interface ApplicationComponent {
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
-  UserRepository userRepository();
+  FeedItemRepository userRepository();
 }

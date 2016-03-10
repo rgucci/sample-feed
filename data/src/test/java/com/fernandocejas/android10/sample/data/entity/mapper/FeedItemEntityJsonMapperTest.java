@@ -30,7 +30,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UserEntityJsonMapperTest extends ApplicationTestCase {
+public class FeedItemEntityJsonMapperTest extends ApplicationTestCase {
 
   private static final String JSON_RESPONSE_USER_DETAILS = "{\n"
       + "    \"id\": 1,\n"

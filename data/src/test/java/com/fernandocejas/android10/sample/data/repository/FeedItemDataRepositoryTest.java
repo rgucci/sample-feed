@@ -18,10 +18,11 @@ package com.fernandocejas.android10.sample.data.repository;
 import com.fernandocejas.android10.sample.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
-import com.rgucci.sample.feed.data.repository.UserDataRepository;
+import com.rgucci.sample.feed.data.repository.FeedItemDataRepository;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStore;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStoreFactory;
-import com.rgucci.sample.feed.domain.User;
+import com.rgucci.sample.feed.domain.FeedItem;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
@@ -36,17 +37,17 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 
-public class UserDataRepositoryTest extends ApplicationTestCase {
+public class FeedItemDataRepositoryTest extends ApplicationTestCase {
 
   private static final int FAKE_USER_ID = 123;
 
-  private UserDataRepository userDataRepository;
+  private FeedItemDataRepository userDataRepository;
 
   @Mock private UserDataStoreFactory mockUserDataStoreFactory;
   @Mock private UserEntityDataMapper mockUserEntityDataMapper;
   @Mock private UserDataStore mockUserDataStore;
   @Mock private UserEntity mockUserEntity;
-  @Mock private User mockUser;
+  @Mock private FeedItem mockFeedItem;
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
@@ -54,7 +55,7 @@ public class UserDataRepositoryTest extends ApplicationTestCase {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    userDataRepository = new UserDataRepository(mockUserDataStoreFactory,
+    userDataRepository = new FeedItemDataRepository(mockUserDataStoreFactory,
         mockUserEntityDataMapper);
 
     given(mockUserDataStoreFactory.create(anyInt())).willReturn(mockUserDataStore);
@@ -67,7 +68,7 @@ public class UserDataRepositoryTest extends ApplicationTestCase {
     usersList.add(new UserEntity());
     given(mockUserDataStore.userEntityList()).willReturn(Observable.just(usersList));
 
-    userDataRepository.users();
+    userDataRepository.feedItems();
 
     verify(mockUserDataStoreFactory).createCloudDataStore();
     verify(mockUserDataStore).userEntityList();

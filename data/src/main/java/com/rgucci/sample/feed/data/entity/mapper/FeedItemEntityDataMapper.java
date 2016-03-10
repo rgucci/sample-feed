@@ -19,21 +19,21 @@ import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.domain.FeedItem;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Mapper class used to transform {@link UserEntity} (in the data layer) to {@link FeedItem} in the
  * domain layer.
  */
 @Singleton
-public class UserEntityDataMapper {
+public class FeedItemEntityDataMapper {
 
   @Inject
-  public UserEntityDataMapper() {}
+  public FeedItemEntityDataMapper() {}
 
   /**
    * Transform a {@link UserEntity} into an {@link FeedItem}.
@@ -45,8 +45,8 @@ public class UserEntityDataMapper {
     FeedItem feedItem = null;
     if (userEntity != null) {
       feedItem = new FeedItem(userEntity.getId());
-      feedItem.setCoverUrl(userEntity.getThumbnailUrl());
       feedItem.setDescription(userEntity.getCaption());
+      feedItem.setCoverUrl(userEntity.getThumbnailUrl());
     }
 
     return feedItem;

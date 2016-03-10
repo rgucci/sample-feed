@@ -18,8 +18,9 @@ package com.rgucci.sample.feed.data.repository;
 import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStore;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStoreFactory;
-import com.rgucci.sample.feed.domain.User;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
+import com.rgucci.sample.feed.domain.FeedItem;
+import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
+
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,39 +28,34 @@ import javax.inject.Singleton;
 import rx.Observable;
 
 /**
- * {@link UserRepository} for retrieving user data.
+ * {@link FeedItemRepository} for retrieving user data.
  */
 @Singleton
-public class UserDataRepository implements UserRepository {
+public class FeedItemDataRepository implements FeedItemRepository {
 
   private final UserDataStoreFactory userDataStoreFactory;
   private final UserEntityDataMapper userEntityDataMapper;
 
   /**
-   * Constructs a {@link UserRepository}.
+   * Constructs a {@link FeedItemRepository}.
    *
    * @param dataStoreFactory A factory to construct different data source implementations.
    * @param userEntityDataMapper {@link UserEntityDataMapper}.
    */
   @Inject
-  public UserDataRepository(UserDataStoreFactory dataStoreFactory,
-      UserEntityDataMapper userEntityDataMapper) {
+  public FeedItemDataRepository(UserDataStoreFactory dataStoreFactory,
+          UserEntityDataMapper userEntityDataMapper) {
     this.userDataStoreFactory = dataStoreFactory;
     this.userEntityDataMapper = userEntityDataMapper;
   }
 
   @SuppressWarnings("Convert2MethodRef")
-  @Override public Observable<List<User>> users() {
-    //we always get all users from the cloud
-    final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
-    return userDataStore.userEntityList()
+  @Override public Observable<List<FeedItem>> feedItems() {
+    //we always get all feedItems from the cloud
+//    final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+    final UserDataStore userDataStore = this.userDataStoreFactory.createRawResourceDataStore();
+    return userDataStore.feedItemEntityList()
         .map(userEntities -> this.userEntityDataMapper.transform(userEntities));
   }
 
-  @SuppressWarnings("Convert2MethodRef")
-  @Override public Observable<User> user(int userId) {
-    final UserDataStore userDataStore = this.userDataStoreFactory.create(userId);
-    return userDataStore.userEntityDetails(userId)
-        .map(userEntity -> this.userEntityDataMapper.transform(userEntity));
-  }
 }

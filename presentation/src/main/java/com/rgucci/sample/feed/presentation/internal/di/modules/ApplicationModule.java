@@ -19,10 +19,10 @@ import android.content.Context;
 import com.rgucci.sample.feed.data.cache.UserCache;
 import com.rgucci.sample.feed.data.cache.UserCacheImpl;
 import com.rgucci.sample.feed.data.executor.JobExecutor;
-import com.rgucci.sample.feed.data.repository.UserDataRepository;
+import com.rgucci.sample.feed.data.repository.FeedItemDataRepository;
 import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
 import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
+import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
 import com.rgucci.sample.feed.presentation.AndroidApplication;
 import com.rgucci.sample.feed.presentation.UIThread;
 import dagger.Module;
@@ -59,7 +59,7 @@ public class ApplicationModule {
   }
 
   @Provides @Singleton
-  UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+  FeedItemRepository provideUserRepository(FeedItemDataRepository userDataRepository) {
     return userDataRepository;
   }
 }

@@ -64,7 +64,7 @@ public class UserCacheImpl implements UserCache {
     this.threadExecutor = executor;
   }
 
-  @Override public Observable<UserEntity> get(final int userId) {
+  @Override public Observable<UserEntity> get(final String userId) {
     return Observable.create(subscriber -> {
       File userEntityFile = UserCacheImpl.this.buildFile(userId);
       String fileContent = UserCacheImpl.this.fileManager.readFileContent(userEntityFile);
@@ -81,8 +81,8 @@ public class UserCacheImpl implements UserCache {
 
   @Override public void put(UserEntity userEntity) {
     if (userEntity != null) {
-      File userEntitiyFile = this.buildFile(userEntity.getUserId());
-      if (!isCached(userEntity.getUserId())) {
+      File userEntitiyFile = this.buildFile(userEntity.getId());
+      if (!isCached(userEntity.getId())) {
         String jsonString = this.serializer.serialize(userEntity);
         this.executeAsynchronously(new CacheWriter(this.fileManager, userEntitiyFile,
             jsonString));
@@ -91,7 +91,7 @@ public class UserCacheImpl implements UserCache {
     }
   }
 
-  @Override public boolean isCached(int userId) {
+  @Override public boolean isCached(String userId) {
     File userEntitiyFile = this.buildFile(userId);
     return this.fileManager.exists(userEntitiyFile);
   }
@@ -119,7 +119,7 @@ public class UserCacheImpl implements UserCache {
    * @param userId The id user to build the file.
    * @return A valid file.
    */
-  private File buildFile(int userId) {
+  private File buildFile(String userId) {
     StringBuilder fileNameBuilder = new StringBuilder();
     fileNameBuilder.append(this.cacheDir.getPath());
     fileNameBuilder.append(File.separator);

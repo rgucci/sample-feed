@@ -18,21 +18,21 @@ package com.rgucci.sample.feed.data.entity;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * User Entity used in the data layer.
+ * FeedItem Entity used in the data layer.
  */
 public class UserEntity {
 
   @SerializedName("id")
-  private int userId;
+  private String id;
 
   @SerializedName("cover_url")
   private String coverUrl;
 
   @SerializedName("full_name")
-  private String fullname;
+  private String description;
 
   @SerializedName("description")
-  private String description;
+  private String fullname;
 
   @SerializedName("followers")
   private int followers;
@@ -44,12 +44,12 @@ public class UserEntity {
     //empty
   }
 
-  public int getUserId() {
-    return userId;
+  public String getId() {
+    return id;
   }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getCoverUrl() {
@@ -95,8 +95,8 @@ public class UserEntity {
   @Override public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
 
-    stringBuilder.append("***** User Entity Details *****\n");
-    stringBuilder.append("id=" + this.getUserId() + "\n");
+    stringBuilder.append("***** FeedItem Entity Details *****\n");
+    stringBuilder.append("id=" + this.getId() + "\n");
     stringBuilder.append("cover url=" + this.getCoverUrl() + "\n");
     stringBuilder.append("fullname=" + this.getFullname() + "\n");
     stringBuilder.append("email=" + this.getEmail() + "\n");

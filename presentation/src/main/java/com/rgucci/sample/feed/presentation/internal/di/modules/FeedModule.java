@@ -15,12 +15,8 @@
  */
 package com.rgucci.sample.feed.presentation.internal.di.modules;
 
-import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
-import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
-import com.rgucci.sample.feed.domain.interactor.GetUserDetails;
-import com.rgucci.sample.feed.domain.interactor.GetUserList;
+import com.rgucci.sample.feed.domain.interactor.GetFeedItems;
 import com.rgucci.sample.feed.domain.interactor.UseCase;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
 import com.rgucci.sample.feed.presentation.internal.di.PerActivity;
 import dagger.Module;
 import dagger.Provides;
@@ -37,8 +33,8 @@ public class FeedModule {
 
   @Provides @PerActivity @Named("feedItemList")
   UseCase provideGetUserListUseCase(
-      GetUserList getUserList) {
-    return getUserList;
+      GetFeedItems getFeedItems) {
+    return getFeedItems;
   }
 
 }

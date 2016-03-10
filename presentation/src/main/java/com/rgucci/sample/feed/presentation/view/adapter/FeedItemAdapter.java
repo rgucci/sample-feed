@@ -52,7 +52,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
 
   @Override public void onBindViewHolder(FeedItemViewHolder holder, final int position) {
     final FeedItemModel feedItemModel = this.feedItemsList.get(position);
-    holder.textViewTitle.setText(feedItemModel.getFullName());
+    holder.textViewTitle.setText(feedItemModel.getDescription());
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (FeedItemAdapter.this.onItemClickListener != null) {

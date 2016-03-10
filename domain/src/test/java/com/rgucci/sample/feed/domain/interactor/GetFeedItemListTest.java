@@ -17,7 +17,7 @@ package com.rgucci.sample.feed.domain.interactor;
 
 import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
 import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
-import com.rgucci.sample.feed.domain.repository.UserRepository;
+import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,27 +27,27 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-public class GetUserListTest {
+public class GetFeedItemListTest {
 
-  private GetUserList getUserList;
+  private GetFeedItems getFeedItems;
 
   @Mock private ThreadExecutor mockThreadExecutor;
   @Mock private PostExecutionThread mockPostExecutionThread;
-  @Mock private UserRepository mockUserRepository;
+  @Mock private FeedItemRepository mockFeedItemRepository;
 
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    getUserList = new GetUserList(mockUserRepository, mockThreadExecutor,
+    getFeedItems = new GetFeedItems(mockFeedItemRepository, mockThreadExecutor,
         mockPostExecutionThread);
   }
 
   @Test
   public void testGetUserListUseCaseObservableHappyCase() {
-    getUserList.buildUseCaseObservable();
+    getFeedItems.buildUseCaseObservable();
 
-    verify(mockUserRepository).users();
-    verifyNoMoreInteractions(mockUserRepository);
+    verify(mockFeedItemRepository).feedItems();
+    verifyNoMoreInteractions(mockFeedItemRepository);
     verifyZeroInteractions(mockThreadExecutor);
     verifyZeroInteractions(mockPostExecutionThread);
   }

@@ -62,6 +62,8 @@ public class RestApiImpl implements RestApi {
           } else {
             subscriber.onError(new NetworkConnectionException());
           }
+
+
         } catch (Exception e) {
           subscriber.onError(new NetworkConnectionException(e.getCause()));
         }
@@ -72,7 +74,7 @@ public class RestApiImpl implements RestApi {
   }
 
   @RxLogObservable
-  @Override public Observable<UserEntity> userEntityById(final int userId) {
+  @Override public Observable<UserEntity> userEntityById(final String userId) {
     return Observable.create(subscriber -> {
       if (isThereInternetConnection()) {
         try {
@@ -96,7 +98,7 @@ public class RestApiImpl implements RestApi {
     return ApiConnection.createGET(RestApi.API_URL_GET_USER_LIST).requestSyncCall();
   }
 
-  private String getUserDetailsFromApi(int userId) throws MalformedURLException {
+  private String getUserDetailsFromApi(String userId) throws MalformedURLException {
     String apiUrl = RestApi.API_URL_GET_USER_DETAILS + userId + ".json";
     return ApiConnection.createGET(apiUrl).requestSyncCall();
   }

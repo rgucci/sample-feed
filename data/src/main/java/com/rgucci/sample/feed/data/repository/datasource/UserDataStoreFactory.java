@@ -44,7 +44,7 @@ public class UserDataStoreFactory {
   /**
    * Create {@link UserDataStore} from a user id.
    */
-  public UserDataStore create(int userId) {
+  public UserDataStore create(String userId) {
     UserDataStore userDataStore;
 
     if (!this.userCache.isExpired() && this.userCache.isCached(userId)) {
@@ -64,5 +64,9 @@ public class UserDataStoreFactory {
     RestApi restApi = new RestApiImpl(this.context, userEntityJsonMapper);
 
     return new CloudUserDataStore(restApi, this.userCache);
+  }
+
+  public UserDataStore createRawResourceDataStore() {
+    return new RawDataSource(context);
   }
 }
