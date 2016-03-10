@@ -36,12 +36,22 @@ import java.util.List;
  */
 public class FeedFragment extends BaseFragment implements FeedView {
 
+    private static final String PARAM_CATEGORY = "PARAM_CATEGORY";
+
   /**
    * Interface for listening user list events.
    */
   public interface FeedListener {
     void onUserClicked(final FeedItemModel userModel);
   }
+
+    public static FeedFragment newInstance(final Category category) {
+        FeedFragment fragment = new FeedFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(PARAM_CATEGORY, category);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
   @Inject FeedPresenter feedPresenter;
   @Inject FeedItemAdapter feedItemAdapter;
@@ -52,6 +62,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
   @Bind(R.id.bt_retry) Button bt_retry;
 
   private FeedListener feedListener;
+    private Category category = Category.Hot;
 
   public FeedFragment() {
     setRetainInstance(true);
@@ -67,6 +78,13 @@ public class FeedFragment extends BaseFragment implements FeedView {
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     this.getComponent(FeedComponent.class).inject(this);
+
+      Bundle args = getArguments();
+      final Category paramCategory = (Category) args.getSerializable(PARAM_CATEGORY);
+      if (paramCategory != null) {
+          category = paramCategory;
+      }
+
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,11 +149,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   @Override public void renderUserList(List<FeedItemModel> userModelCollection) {
     if (userModelCollection != null) {
-        if (feedItemAdapter.getItemCount()  == 0) {
-            this.feedItemAdapter.setFeedItemsList(userModelCollection);
-        } else {
-            this.feedItemAdapter.addFeedItems(userModelCollection);
-        }
+        this.feedItemAdapter.setFeedItemsList(userModelCollection);
     }
   }
 
@@ -172,7 +186,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
    * Loads all feedItems.
    */
   private void loadFeedItems() {
-      this.feedPresenter.setCategory(Category.Trending);
+    this.feedPresenter.setCategory(category);
     this.feedPresenter.initialize();
   }
 

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.presentation.R;
 import com.rgucci.sample.feed.presentation.internal.di.HasComponent;
 import com.rgucci.sample.feed.presentation.internal.di.components.DaggerFeedComponent;
@@ -35,7 +36,7 @@ public class FeedActivity extends BaseActivity implements HasComponent<FeedCompo
 
         this.initializeInjector();
         if (savedInstanceState == null) {
-            addFragment(R.id.fragmentContainer, new FeedFragment());
+            addFragment(R.id.fragmentContainer, FeedFragment.newInstance(Category.Fresh));
         }
     }
 

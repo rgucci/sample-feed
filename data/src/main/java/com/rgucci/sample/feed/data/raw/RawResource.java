@@ -32,7 +32,7 @@ public class RawResource {
 
     private final int[] hotPages = { R.raw.hot_1, R.raw.hot_2, R.raw.hot_3};
     private final int[] freshPages = { R.raw.fresh_1, R.raw.fresh_2, R.raw.fresh_3};
-    private final int[] trendingPages = { R.raw.trending_1};//, R.raw.trending_2, R.raw.trending_3};
+    private final int[] trendingPages = { R.raw.trending_1, R.raw.trending_2, R.raw.trending_3};
     private final int[] timelyPages = { R.raw.timely_1, R.raw.timely_2, R.raw.timely_3};
 
     private Map<Category, int[]> categories = new HashMap<>();
