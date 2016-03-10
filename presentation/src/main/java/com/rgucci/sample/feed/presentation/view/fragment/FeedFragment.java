@@ -8,8 +8,8 @@ package com.rgucci.sample.feed.presentation.view.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,9 @@ import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 import com.rgucci.sample.feed.presentation.presenter.FeedPresenter;
 import com.rgucci.sample.feed.presentation.view.FeedView;
 import com.rgucci.sample.feed.presentation.view.adapter.FeedItemAdapter;
+import com.rgucci.sample.feed.presentation.view.adapter.FeedItemHorizontalAdapter;
 import com.rgucci.sample.feed.presentation.view.adapter.FeedItemLayoutManager;
+import com.rgucci.sample.feed.presentation.view.adapter.FeedItemVerticalAdapter;
 import com.rgucci.sample.feed.presentation.view.component.EndlessRecyclerScrollListener;
 
 import javax.inject.Inject;
@@ -56,9 +58,11 @@ public class FeedFragment extends BaseFragment implements FeedView {
     }
 
   @Inject FeedPresenter feedPresenter;
-  @Inject FeedItemAdapter feedItemAdapter;
+  @Inject FeedItemVerticalAdapter feedItemVerticalAdapter;
+  @Inject FeedItemHorizontalAdapter feedItemHorizontalAdapter;
 
-  @Bind(R.id.rv_users) RecyclerView rv_users;
+  @Bind(R.id.rv_topList) RecyclerView rv_topList;
+  @Bind(R.id.rv_feedlist) RecyclerView rv_users;
   @Bind(R.id.rl_progress) RelativeLayout rl_progress;
   @Bind(R.id.rl_retry) RelativeLayout rl_retry;
   @Bind(R.id.bt_retry) Button bt_retry;
@@ -154,7 +158,8 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   @Override public void renderUserList(List<FeedItemModel> userModelCollection) {
     if (userModelCollection != null) {
-        this.feedItemAdapter.setFeedItemsList(userModelCollection);
+        this.feedItemVerticalAdapter.setFeedItemsList(userModelCollection);
+        this.feedItemHorizontalAdapter.setFeedItemsList(userModelCollection);
     }
   }
 
@@ -173,16 +178,27 @@ public class FeedFragment extends BaseFragment implements FeedView {
   }
 
   private void setupRecyclerView() {
-    this.feedItemAdapter.setOnItemClickListener(onItemClickListener);
-    final FeedItemLayoutManager layoutManager = new FeedItemLayoutManager(context());
+      final FeedItemLayoutManager topLayoutManager = new FeedItemLayoutManager(context(), LinearLayoutManager.HORIZONTAL);
+      rv_topList.setLayoutManager(topLayoutManager);
+      rv_topList.setAdapter(feedItemHorizontalAdapter);
+
+    this.feedItemVerticalAdapter.setOnItemClickListener(onItemClickListener);
+    final FeedItemLayoutManager layoutManager = new FeedItemLayoutManager(context(), LinearLayoutManager.VERTICAL);
     this.rv_users.setLayoutManager(layoutManager);
-    this.rv_users.setAdapter(feedItemAdapter);
+    this.rv_users.setAdapter(feedItemVerticalAdapter);
     this.rv_users.setOnScrollListener(new EndlessRecyclerScrollListener(layoutManager) {
-      @Override
-      public void onLoadMore(final int currentPage) {
-          feedPresenter.getNextPage(currentPage);
-      }
+        @Override
+        public void onLoadMore(final int currentPage) {
+            feedPresenter.getNextPage(currentPage);
+        }
     });
+
+      rv_topList.setOnScrollListener(new EndlessRecyclerScrollListener(topLayoutManager) {
+          @Override
+          public void onLoadMore(final int current_page) {
+              feedPresenter.getNextPage(current_page);
+          }
+      });
   }
 
   /**

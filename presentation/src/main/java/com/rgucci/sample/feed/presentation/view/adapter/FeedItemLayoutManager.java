@@ -11,7 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
  * Layout manager to position items inside a {@link android.support.v7.widget.RecyclerView}.
  */
 public class FeedItemLayoutManager extends LinearLayoutManager {
-  public FeedItemLayoutManager(Context context) {
-    super(context);
+  public FeedItemLayoutManager(Context context, int orientation) {
+    super(context, orientation, false);
   }
 }

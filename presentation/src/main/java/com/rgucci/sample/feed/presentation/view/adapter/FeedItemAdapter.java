@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Adaptar that manages a collection of {@link FeedItemModel}.
  */
-public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder> {
+public abstract class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder> {
 
   public interface OnItemClickListener {
     void onFeedItemClicked(FeedItemModel feedItemModel);
@@ -37,7 +37,6 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
 
   private OnItemClickListener onItemClickListener;
 
-  @Inject
   public FeedItemAdapter(Context context) {
     this.layoutInflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,11 +48,13 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
   }
 
   @Override public FeedItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    final View view = this.layoutInflater.inflate(R.layout.row_feed_item, parent, false);
+    final View view = this.layoutInflater.inflate(getLayoutResource(), parent, false);
     return new FeedItemViewHolder(view);
   }
 
-  @Override public void onBindViewHolder(FeedItemViewHolder holder, final int position) {
+    protected abstract int getLayoutResource();
+
+    @Override public void onBindViewHolder(FeedItemViewHolder holder, final int position) {
     final FeedItemModel feedItemModel = this.feedItemsList.get(position);
     holder.textViewTitle.setText(feedItemModel.getDescription());
     Glide.with(holder.imageViewThumbnail.getContext()).
@@ -87,11 +88,6 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
       throw new IllegalArgumentException("The list cannot be null");
     }
   }
-
-    public void addFeedItems(List<FeedItemModel> newFeedItems) {
-        feedItemsList.addAll(newFeedItems);
-        notifyDataSetChanged();
-    }
 
   static class FeedItemViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.title) TextView textViewTitle;
