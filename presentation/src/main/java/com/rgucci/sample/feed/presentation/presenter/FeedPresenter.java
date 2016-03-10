@@ -16,6 +16,7 @@
 package com.rgucci.sample.feed.presentation.presenter;
 
 import android.support.annotation.NonNull;
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.exception.DefaultErrorBundle;
 import com.rgucci.sample.feed.domain.exception.ErrorBundle;
@@ -30,7 +31,7 @@ import com.rgucci.sample.feed.presentation.view.FeedView;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,14 +43,18 @@ public class FeedPresenter implements Presenter {
 
   private FeedView viewListView;
 
-  private final UseCase getUserListUseCase;
-  private final FeedItemModelDataMapper userModelDataMapper;
+  private final UseCase getFeedItemsUseCase;
+  private final FeedItemModelDataMapper feedItemModelDataMapper;
+
+    private Category category = Category.Hot;
+    private int currentPage = 1;
+    private List<FeedItem> feedItems = new ArrayList<>();
 
   @Inject
-  public FeedPresenter(@Named("feedItemList") UseCase getUserListUserCase,
-          FeedItemModelDataMapper userModelDataMapper) {
-    this.getUserListUseCase = getUserListUserCase;
-    this.userModelDataMapper = userModelDataMapper;
+  public FeedPresenter(@Named("feedItemList") UseCase getFeedItemsUseCase,
+          FeedItemModelDataMapper feedItemModelDataMapper) {
+    this.getFeedItemsUseCase = getFeedItemsUseCase;
+    this.feedItemModelDataMapper = feedItemModelDataMapper;
   }
 
   public void setView(@NonNull FeedView view) {
@@ -61,7 +66,7 @@ public class FeedPresenter implements Presenter {
   @Override public void pause() {}
 
   @Override public void destroy() {
-    this.getUserListUseCase.unsubscribe();
+    this.getFeedItemsUseCase.unsubscribe();
     this.viewListView = null;
   }
 
@@ -78,7 +83,7 @@ public class FeedPresenter implements Presenter {
   private void loadUserList() {
     this.hideViewRetry();
     this.showViewLoading();
-    this.getUserList(1);
+    this.getFeedItems(category, currentPage);
   }
 
   public void onUserClicked(FeedItemModel userModel) {
@@ -107,18 +112,27 @@ public class FeedPresenter implements Presenter {
     this.viewListView.showError(errorMessage);
   }
 
-  private void showUsersCollectionInView(Collection<FeedItem> usersCollection) {
-    final Collection<FeedItemModel> userModelsCollection =
-        this.userModelDataMapper.transform(usersCollection);
-    this.viewListView.renderUserList(userModelsCollection);
+  private void showUsersCollectionInView(List<FeedItem> feedItemsList) {
+    final List<FeedItemModel> feedItemModelList =
+        this.feedItemModelDataMapper.transform(feedItemsList);
+    this.viewListView.renderUserList(feedItemModelList);
   }
 
-  private void getUserList(final int page) {
-    ((GetFeedItems) this.getUserListUseCase).init(page);
-    this.getUserListUseCase.execute(new UserListSubscriber());
+  private void getFeedItems(final Category category, final int page) {
+    ((GetFeedItems) this.getFeedItemsUseCase).init(category, page);
+    this.getFeedItemsUseCase.execute(new FeedItemListSubscriber());
   }
 
-  private final class UserListSubscriber extends DefaultSubscriber<List<FeedItem>> {
+    public void setCategory(final Category category) {
+        this.category = category;
+    }
+
+    public void getNextPage(final int page) {
+        this.currentPage = page;
+        getFeedItems(category, page);
+    }
+
+    private final class FeedItemListSubscriber extends DefaultSubscriber<List<FeedItem>> {
 
     @Override public void onCompleted() {
       FeedPresenter.this.hideViewLoading();
@@ -130,8 +144,11 @@ public class FeedPresenter implements Presenter {
       FeedPresenter.this.showViewRetry();
     }
 
-    @Override public void onNext(List<FeedItem> feedItems) {
-      FeedPresenter.this.showUsersCollectionInView(feedItems);
+    @Override public void onNext(List<FeedItem> newFeedItems) {
+        if (newFeedItems.size() > 0) {
+            feedItems.addAll(newFeedItems);
+            FeedPresenter.this.showUsersCollectionInView(feedItems);
+        }
     }
   }
 }

@@ -18,6 +18,7 @@ package com.rgucci.sample.feed.data.repository;
 import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStore;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStoreFactory;
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.repository.FeedItemRepository;
 
@@ -50,11 +51,11 @@ public class FeedItemDataRepository implements FeedItemRepository {
   }
 
   @SuppressWarnings("Convert2MethodRef")
-  @Override public Observable<List<FeedItem>> feedItems(final int page) {
+  @Override public Observable<List<FeedItem>> feedItems(final Category category, final int page) {
     //we always get all feedItems from the cloud
 //    final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
     final UserDataStore userDataStore = this.userDataStoreFactory.createRawResourceDataStore();
-    return userDataStore.feedItemEntityList(page)
+    return userDataStore.feedItemEntityList(category, page)
         .map(userEntities -> this.userEntityDataMapper.transform(userEntities));
   }
 

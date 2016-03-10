@@ -18,6 +18,8 @@ package com.rgucci.sample.feed.data.repository.datasource;
 import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import java.util.List;
+
+import com.rgucci.sample.feed.domain.Category;
 import rx.Observable;
 
 /**
@@ -28,7 +30,7 @@ public interface UserDataStore {
    * Get an {@link rx.Observable} which will emit a List of {@link UserEntity}.
    */
   Observable<List<UserEntity>> userEntityList();
-  Observable<List<FeedItemEntity>> feedItemEntityList(int page);
+  Observable<List<FeedItemEntity>> feedItemEntityList(Category category, int page);
 
   /**
    * Get an {@link rx.Observable} which will emit a {@link UserEntity} by its id.

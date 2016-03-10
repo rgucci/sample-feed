@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.presentation.R;
 import com.rgucci.sample.feed.presentation.internal.di.components.FeedComponent;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
@@ -24,9 +26,10 @@ import com.rgucci.sample.feed.presentation.presenter.FeedPresenter;
 import com.rgucci.sample.feed.presentation.view.FeedView;
 import com.rgucci.sample.feed.presentation.view.adapter.FeedItemAdapter;
 import com.rgucci.sample.feed.presentation.view.adapter.FeedItemLayoutManager;
+import com.rgucci.sample.feed.presentation.view.component.EndlessRecyclerScrollListener;
 
 import javax.inject.Inject;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Fragment that shows a feed of posts.
@@ -40,8 +43,8 @@ public class FeedFragment extends BaseFragment implements FeedView {
     void onUserClicked(final FeedItemModel userModel);
   }
 
-  @Inject FeedPresenter userListPresenter;
-  @Inject FeedItemAdapter usersAdapter;
+  @Inject FeedPresenter feedPresenter;
+  @Inject FeedItemAdapter feedItemAdapter;
 
   @Bind(R.id.rv_users) RecyclerView rv_users;
   @Bind(R.id.rl_progress) RelativeLayout rl_progress;
@@ -76,20 +79,20 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    this.userListPresenter.setView(this);
+    this.feedPresenter.setView(this);
     if (savedInstanceState == null) {
-      this.loadUserList();
+      this.loadFeedItems();
     }
   }
 
   @Override public void onResume() {
     super.onResume();
-    this.userListPresenter.resume();
+    this.feedPresenter.resume();
   }
 
   @Override public void onPause() {
     super.onPause();
-    this.userListPresenter.pause();
+    this.feedPresenter.pause();
   }
 
   @Override public void onDestroyView() {
@@ -100,7 +103,7 @@ public class FeedFragment extends BaseFragment implements FeedView {
 
   @Override public void onDestroy() {
     super.onDestroy();
-    this.userListPresenter.destroy();
+    this.feedPresenter.destroy();
   }
 
   @Override public void onDetach() {
@@ -126,9 +129,13 @@ public class FeedFragment extends BaseFragment implements FeedView {
     this.rl_retry.setVisibility(View.GONE);
   }
 
-  @Override public void renderUserList(Collection<FeedItemModel> userModelCollection) {
+  @Override public void renderUserList(List<FeedItemModel> userModelCollection) {
     if (userModelCollection != null) {
-      this.usersAdapter.setFeedItemsList(userModelCollection);
+        if (feedItemAdapter.getItemCount()  == 0) {
+            this.feedItemAdapter.setFeedItemsList(userModelCollection);
+        } else {
+            this.feedItemAdapter.addFeedItems(userModelCollection);
+        }
     }
   }
 
@@ -147,27 +154,37 @@ public class FeedFragment extends BaseFragment implements FeedView {
   }
 
   private void setupRecyclerView() {
-    this.usersAdapter.setOnItemClickListener(onItemClickListener);
-    this.rv_users.setLayoutManager(new FeedItemLayoutManager(context()));
-    this.rv_users.setAdapter(usersAdapter);
+    this.feedItemAdapter.setOnItemClickListener(onItemClickListener);
+    final FeedItemLayoutManager layoutManager = new FeedItemLayoutManager(context());
+    this.rv_users.setLayoutManager(layoutManager);
+    this.rv_users.setAdapter(feedItemAdapter);
+    this.rv_users.setOnScrollListener(new EndlessRecyclerScrollListener(layoutManager) {
+      @Override
+      public void onLoadMore(final int currentPage) {
+        //TODO load the next pages here
+          Log.d("LoadMore", "page: " + currentPage);
+          feedPresenter.getNextPage(currentPage);
+      }
+    });
   }
 
   /**
    * Loads all feedItems.
    */
-  private void loadUserList() {
-    this.userListPresenter.initialize();
+  private void loadFeedItems() {
+      this.feedPresenter.setCategory(Category.Trending);
+    this.feedPresenter.initialize();
   }
 
   @OnClick(R.id.bt_retry) void onButtonRetryClick() {
-    FeedFragment.this.loadUserList();
+    FeedFragment.this.loadFeedItems();
   }
 
   private FeedItemAdapter.OnItemClickListener onItemClickListener =
       new FeedItemAdapter.OnItemClickListener() {
         @Override public void onFeedItemClicked(FeedItemModel userModel) {
-          if (FeedFragment.this.userListPresenter != null && userModel != null) {
-            FeedFragment.this.userListPresenter.onUserClicked(userModel);
+          if (FeedFragment.this.feedPresenter != null && userModel != null) {
+            FeedFragment.this.feedPresenter.onUserClicked(userModel);
           }
         }
       };

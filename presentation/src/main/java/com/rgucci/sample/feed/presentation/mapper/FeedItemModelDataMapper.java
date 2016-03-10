@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Mapper class used to transform {@link FeedItem} (in the domain layer) to {@link FeedItemModel} in the
@@ -57,8 +58,8 @@ public class FeedItemModelDataMapper {
    * @param feedItemCollection Objects to be transformed.
    * @return List of {@link FeedItemModel}.
    */
-  public Collection<FeedItemModel> transform(Collection<FeedItem> feedItemCollection) {
-    Collection<FeedItemModel> feedItemModels;
+  public List<FeedItemModel> transform(Collection<FeedItem> feedItemCollection) {
+    List<FeedItemModel> feedItemModels;
 
     if (feedItemCollection != null && !feedItemCollection.isEmpty()) {
       feedItemModels = new ArrayList<>();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.presentation.R;
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 
@@ -86,6 +87,11 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
       throw new IllegalArgumentException("The list cannot be null");
     }
   }
+
+    public void addFeedItems(List<FeedItemModel> newFeedItems) {
+        feedItemsList.addAll(newFeedItems);
+        notifyDataSetChanged();
+    }
 
   static class FeedItemViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.title) TextView textViewTitle;

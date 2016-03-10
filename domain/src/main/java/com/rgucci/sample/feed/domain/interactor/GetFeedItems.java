@@ -15,6 +15,7 @@
  */
 package com.rgucci.sample.feed.domain.interactor;
 
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.domain.FeedItem;
 import com.rgucci.sample.feed.domain.executor.PostExecutionThread;
 import com.rgucci.sample.feed.domain.executor.ThreadExecutor;
@@ -31,6 +32,7 @@ public class GetFeedItems extends UseCase {
 
   private final FeedItemRepository feedItemRepository;
 
+  private Category category;
   private int page;
 
   @Inject
@@ -41,10 +43,11 @@ public class GetFeedItems extends UseCase {
   }
 
   @Override public Observable buildUseCaseObservable() {
-    return this.feedItemRepository.feedItems(page);
+    return this.feedItemRepository.feedItems(category, page);
   }
 
-  public UseCase init(final int page) {
+  public UseCase init(final Category category, final int page) {
+    this.category = category;
     this.page = page;
     return this;
   }

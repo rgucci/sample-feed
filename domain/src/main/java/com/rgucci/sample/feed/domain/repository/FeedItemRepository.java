@@ -15,6 +15,7 @@
  */
 package com.rgucci.sample.feed.domain.repository;
 
+import com.rgucci.sample.feed.domain.Category;
 import com.rgucci.sample.feed.domain.FeedItem;
 
 import java.util.List;
@@ -27,6 +28,6 @@ public interface FeedItemRepository {
   /**
    * Get an {@link rx.Observable} which will emit a List of {@link FeedItem}.
    */
-  Observable<List<FeedItem>> feedItems(final int page);
+  Observable<List<FeedItem>> feedItems(final Category category, final int page);
 
 }

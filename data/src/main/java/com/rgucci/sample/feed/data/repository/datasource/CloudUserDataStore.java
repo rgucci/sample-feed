@@ -20,6 +20,8 @@ import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.net.RestApi;
 import java.util.List;
+
+import com.rgucci.sample.feed.domain.Category;
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -53,7 +55,7 @@ public class CloudUserDataStore implements UserDataStore {
   }
 
   @Override
-  public Observable<List<FeedItemEntity>> feedItemEntityList(final int page) {
+  public Observable<List<FeedItemEntity>> feedItemEntityList(final Category category, final int page) {
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 

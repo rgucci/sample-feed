@@ -22,6 +22,7 @@ import com.rgucci.sample.feed.data.entity.FeedItemEntity;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.exception.NetworkConnectionException;
 import com.rgucci.sample.feed.data.raw.RawResource;
+import com.rgucci.sample.feed.domain.Category;
 import rx.Observable;
 
 import java.util.List;
@@ -47,8 +48,8 @@ public class RawDataSource implements UserDataStore {
 
   @RxLogObservable
   @Override
-  public Observable<List<FeedItemEntity>> feedItemEntityList(final int page) {
-    return rawResource.feedItemEntityList(page);
+  public Observable<List<FeedItemEntity>> feedItemEntityList(final Category category, final int page) {
+    return rawResource.feedItemEntityList(category, page);
   }
 
   @Override public Observable<UserEntity> userEntityDetails(final String userId) {

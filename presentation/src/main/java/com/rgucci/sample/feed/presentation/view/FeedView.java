@@ -6,7 +6,7 @@ package com.rgucci.sample.feed.presentation.view;
 
 import com.rgucci.sample.feed.presentation.model.FeedItemModel;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Interface representing a View in a model view presenter (MVP) pattern.
@@ -18,7 +18,7 @@ public interface FeedView extends LoadDataView {
    *
    * @param userModelCollection The collection of {@link FeedItemModel} that will be shown.
    */
-  void renderUserList(Collection<FeedItemModel> userModelCollection);
+  void renderUserList(List<FeedItemModel> userModelCollection);
 
   /**
    * View a {@link FeedItemModel} profile/details.
