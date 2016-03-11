@@ -1,63 +1,25 @@
-Android-CleanArchitecture [![Build Status](https://travis-ci.org/android10/Android-CleanArchitecture.svg?branch=master)](https://travis-ci.org/android10/Android-CleanArchitecture)
-=========================
+9GAG Feed Sample App
 
-This is a sample app that is part of a blog post I have written about how to architect android application using the Uncle Bob's clean architecture approach. 
+Description
+This application will display a “feed” (a list of posts containing images and captions) similar to those displayed in the 9gag website. There are three tabs, each corresponding to one of the three categories: FRESH, HOT and TRENDING.
 
-[Architecting Android…The clean way?](http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/)
+Each tab will display the feed for each category. Swiping left or right will switch to the previous/next tabs. Initially, only the first page of items will be displayed. Scrolling to the bottom of the list will auto load the next pages (maximum of 3 pages). The horizontal list at the top will also auto load the next pages when the rightmost items are displayed.
 
-[Architecting Android…The evolution](http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/)
+The data for the feed is taken from json files stored as “raw” resources in the APK. Note that an internet connection is needed to actually download and display the images.
+Frameworks and libraries used:
+Android-Clean Architecture was used as the main framework starting point, then modified to display feed items. This is a good starting point to make sure that a good MVP pattern and separation of concerns and proper depenencies are used.
+https://github.com/android10/Android-CleanArchitecture
 
-[Tasting Dagger 2 on Android](http://fernandocejas.com/2015/04/11/tasting-dagger-2-on-android/)
+RecyclerView was used to implement both the vertical and horizontal lists.
 
-[Demo video of this sample](http://youtu.be/XSjV4sG3ni0)
+Dagger2 was used for dependency injection throughout the project
+http://google.github.io/dagger/
 
-Clean architecture
------------------
-![http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/](http://fernandocejas.com/wp-content/uploads/2014/09/clean_architecture1.png)
+Butterknife was used for view binding in the presentation layer
+http://jakewharton.github.io/butterknife/
 
-Architectural approach
------------------
-![http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/](http://fernandocejas.com/wp-content/uploads/2014/09/clean_architecture_android.png)
+RxJava was used to implement asynchronous calls to get data
+https://github.com/ReactiveX/RxJava
 
-Architectural reactive approach
------------------
-![http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/](http://fernandocejas.com/wp-content/uploads/2015/07/clean_architecture_evolution.png)
-
-Local Development
------------------
-
-Here are some useful Gradle/adb commands for executing this example:
-
- * `./gradlew clean build` - Build the entire example and execute unit and integration tests plus lint check.
- * `./gradlew installDebug` - Install the debug apk on the current connected device.
- * `./gradlew runUnitTests` - Execute domain and data layer tests (both unit and integration).
- * `./gradlew runAcceptanceTests` - Execute espresso and instrumentation acceptance tests.
-
-Code style
------------
-
-Here you can download and install the java codestyle.
-https://github.com/android10/java-code-styles
-
-
-License
---------
-
-    Copyright 2014 Fernando Cejas
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-
-![http://www.fernandocejas.com](http://www.android10.org/myimages/android10_logo_big_github.png)
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--CleanArchitecture-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/909)
+Glide was used for image downloading and caching
+https://github.com/bumptech/glide
