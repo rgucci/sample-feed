@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.data.repository.datasource;
+package com.rgucci.sample.feed.data.repository.datasource;
 
-import com.fernandocejas.android10.sample.data.ApplicationTestCase;
+import com.rgucci.sample.feed.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.cache.UserCache;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.net.RestApi;
-import com.rgucci.sample.feed.data.repository.datasource.CloudUserDataStore;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

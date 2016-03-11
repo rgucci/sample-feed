@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.data.repository;
+package com.rgucci.sample.feed.data.repository;
 
-import com.fernandocejas.android10.sample.data.ApplicationTestCase;
+import com.rgucci.sample.feed.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
-import com.rgucci.sample.feed.data.repository.FeedItemDataRepository;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStore;
 import com.rgucci.sample.feed.data.repository.datasource.UserDataStoreFactory;
 import com.rgucci.sample.feed.domain.FeedItem;

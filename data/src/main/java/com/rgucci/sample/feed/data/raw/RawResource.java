@@ -1,17 +1,13 @@
 package com.rgucci.sample.feed.data.raw;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import com.fernandocejas.android10.sample.data.R;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
+import com.rgucci.sample.feed.data.R;
 import com.rgucci.sample.feed.data.entity.FeedItemEntity;
-import com.rgucci.sample.feed.data.entity.UserEntity;
 import com.rgucci.sample.feed.data.exception.NetworkConnectionException;
 import com.rgucci.sample.feed.domain.Category;
-import com.rgucci.sample.feed.domain.FeedItem;
 import rx.Observable;
 
 import java.io.BufferedReader;

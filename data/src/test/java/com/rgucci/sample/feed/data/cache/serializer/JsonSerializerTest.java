@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.data.cache.serializer;
+package com.rgucci.sample.feed.data.cache.serializer;
 
-import com.fernandocejas.android10.sample.data.ApplicationTestCase;
-import com.rgucci.sample.feed.data.cache.serializer.JsonSerializer;
+import com.rgucci.sample.feed.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;

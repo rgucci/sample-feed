@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.data.entity.mapper;
+package com.rgucci.sample.feed.data.entity.mapper;
 
-import com.fernandocejas.android10.sample.data.ApplicationTestCase;
+import com.rgucci.sample.feed.data.ApplicationTestCase;
 import com.rgucci.sample.feed.data.entity.UserEntity;
-import com.rgucci.sample.feed.data.entity.mapper.UserEntityDataMapper;
 import com.rgucci.sample.feed.domain.FeedItem;
 
 import java.util.ArrayList;
