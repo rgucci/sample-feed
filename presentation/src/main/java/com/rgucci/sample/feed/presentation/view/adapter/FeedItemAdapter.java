@@ -57,8 +57,8 @@ public abstract class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapt
     @Override public void onBindViewHolder(FeedItemViewHolder holder, final int position) {
     final FeedItemModel feedItemModel = this.feedItemsList.get(position);
     holder.textViewTitle.setText(feedItemModel.getDescription());
-    Glide.with(holder.imageViewThumbnail.getContext()).
-            load(feedItemModel.getCoverUrl())
+    Glide.with(holder.imageViewThumbnail.getContext())
+            .load(feedItemModel.getCoverUrl())
             .into(holder.imageViewThumbnail);
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {

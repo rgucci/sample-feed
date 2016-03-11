@@ -24,6 +24,7 @@
       android:id="@+id/thumbnail"
       android:layout_width="320dp"
       android:layout_height="240dp"
+      android:src="@drawable/loading"
       android:contentDescription="@string/string_content_description"
       />
 
